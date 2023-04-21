@@ -109,9 +109,9 @@ public class MyGdxGame extends ApplicationAdapter
 	private void inicializarTexturas()
 	{
 		passaros = new Texture[3];
-		passaros[0] = new Texture("angry1.png");
-		passaros[1] = new Texture("angry2.png");
-		passaros[2] = new Texture("angry3.png");
+		passaros[0] = new Texture("passaro1.png");
+		passaros[1] = new Texture("passaro2.png");
+		passaros[2] = new Texture("passaro3.png");
 
 		fundo = new Texture("fundo.png");
 		logo = new Texture("logo.png");
@@ -137,7 +137,7 @@ public class MyGdxGame extends ApplicationAdapter
 		posicaoInicialVerticalPassaro = alturaDipositivo / 2;
 		posicaoCanoHorizontal = larguraDispositivo;
 		espacoEntreCanos = 350;
-		posicaoMoedaY = alturaDipositivo/2;
+	//	posicaoMoedaY = alturaDipositivo/2;
 		posicaoMoedaX = posicaoCanoHorizontal + larguraDispositivo/2;
 
 		//
@@ -166,7 +166,7 @@ public class MyGdxGame extends ApplicationAdapter
 		somVoando = Gdx.audio.newSound(Gdx.files.internal("som_asa.wav"));
 		somColisao = Gdx.audio.newSound(Gdx.files.internal("som_batida.wav"));
 		somPontuacao = Gdx.audio.newSound(Gdx.files.internal("som_pontos.wav"));
-		somMoeda = Gdx.audio.newSound(Gdx.files.internal("coinsound.wav"));
+		//somMoeda = Gdx.audio.newSound(Gdx.files.internal("coinsound.wav"));
 
 		//
 		preferencias = Gdx.app.getPreferences("flappybird");
@@ -216,10 +216,10 @@ public class MyGdxGame extends ApplicationAdapter
 			}
 
 			//
-			if (posicaoMoedaX < -moedaAtual.getWidth() / 2 * escalaMoeda)
-			{
-				resetaMoeda();
-			}
+		//	if (posicaoMoedaX < -moedaAtual.getWidth() / 2 * escalaMoeda)
+		//	{
+		//		resetaMoeda();
+		//	}
 
 			//
 			if (posicaoInicialVerticalPassaro > 0 || toqueTela)
@@ -250,7 +250,7 @@ public class MyGdxGame extends ApplicationAdapter
 				posicaoHorizontalPassaro = 50;
 				posicaoInicialVerticalPassaro = alturaDipositivo / 2;
 				posicaoCanoHorizontal = larguraDispositivo;
-				resetaMoeda();
+				//resetaMoeda();
 			}
 		}
 	}
@@ -267,12 +267,12 @@ public class MyGdxGame extends ApplicationAdapter
 				);
 
 		//
-		circuloMoeda.set
-				(
-						posicaoMoedaX - ((moedaAtual.getWidth() * escalaMoeda) / 2),
-						posicaoMoedaY - ((moedaAtual.getHeight() * escalaMoeda) / 2),
-						(moedaAtual.getWidth() * escalaMoeda) / 2
-				);
+	//	circuloMoeda.set
+	//			(
+	//					posicaoMoedaX - ((moedaAtual.getWidth() * escalaMoeda) / 2),
+	//					posicaoMoedaY - ((moedaAtual.getHeight() * escalaMoeda) / 2),
+	//					(moedaAtual.getWidth() * escalaMoeda) / 2
+	//			);
 
 		//
 		retanguloCanoBaixo.set
@@ -294,17 +294,17 @@ public class MyGdxGame extends ApplicationAdapter
 		//
 		boolean colidiuCanoCima  = Intersector.overlaps(circuloPassaro, retanguloCanoCima);
 		boolean colidiuCanoBaixo = Intersector.overlaps(circuloPassaro, retanguloCanoBaixo);
-		boolean colidiuMoeda 	 = Intersector.overlaps(circuloPassaro, circuloMoeda);
+	//	boolean colidiuMoeda 	 = Intersector.overlaps(circuloPassaro, circuloMoeda);
 
 		//
-		if(colidiuMoeda == true)
-		{
-			if(moedaAtual == moeda1) pontos += valorMoeda1;
-			else pontos += valorMoeda2;
-
-			posicaoMoedaY = alturaDipositivo * 2;
-			somMoeda.play();
-		}
+	//	if(colidiuMoeda == true)
+	//	{
+	//		if(moedaAtual == moeda1) pontos += valorMoeda1;
+	//		else pontos += valorMoeda2;
+//
+	//		posicaoMoedaY = alturaDipositivo * 2;
+	//		somMoeda.play();
+	//	}
 
 		//
 		if (colidiuCanoBaixo || colidiuCanoCima)
@@ -455,7 +455,7 @@ public class MyGdxGame extends ApplicationAdapter
 	}
 
 	//
-	private void resetaMoeda()
+	/*private void resetaMoeda()
 	{
 		posicaoMoedaX = posicaoCanoHorizontal + canoBaixo.getWidth() + moedaAtual.getWidth() + random.nextInt((int) (larguraDispositivo - (moedaAtual.getWidth() * escalaMoeda)));
 		posicaoMoedaY = moedaAtual.getHeight() / 2 + random.nextInt((int) alturaDipositivo - moedaAtual.getHeight() / 2);
@@ -469,7 +469,7 @@ public class MyGdxGame extends ApplicationAdapter
 		{
 			moedaAtual = moeda1;
 		}
-	}
+	} */
 
 	//
 	@Override
