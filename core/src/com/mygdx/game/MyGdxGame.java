@@ -109,9 +109,9 @@ public class MyGdxGame extends ApplicationAdapter
 	private void inicializarTexturas()
 	{
 		passaros = new Texture[3];
-		passaros[0] = new Texture("passaro1.png");
-		passaros[1] = new Texture("passaro2.png");
-		passaros[2] = new Texture("passaro3.png");
+		passaros[0] = new Texture("angry1.png");
+		passaros[1] = new Texture("angry2.png");
+		passaros[2] = new Texture("angry3.png");
 
 		fundo = new Texture("fundo.png");
 		logo = new Texture("logo.png");
