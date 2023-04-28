@@ -32,19 +32,20 @@
 
 ...
 
-Insira os tópicos do README em links para facilitar a navegação do leitor
-
 ## Descrição do projeto
 Um jogo produzido em Java, utilizando as mecânicas e ideias originais do jogo FlappyBird, usado apenas para estudos, sem fins lucrativos.
 
 ## Funcionalidades ⚙️
+
+![image](https://user-images.githubusercontent.com/83593099/235029053-a00988ff-3194-47e5-a0f8-22347b6baf34.png)
+
 ✔️ Funcionalidade 1
+
+As setas vermelhas, representam a movimentação do personagem, sendo pulo ou bater asas para cima e avançar sendo para direita.
 
 ✔️ Funcionalidade 2
 
-✔️ Funcionalidade 3
-
-✔️ Funcionalidade 4
+Nos círculos azuis, temos pontuação. Ao passar entre os canos, a pontuação soma 1 ponto.
 
 ## Pré-requisitos ⚠️    
 Android 8.0
