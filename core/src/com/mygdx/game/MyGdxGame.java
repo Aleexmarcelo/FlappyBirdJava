@@ -21,7 +21,7 @@ import java.util.Random;
 
 public class MyGdxGame extends ApplicationAdapter
 {
-	//
+	//Variáveis de textura
 	private SpriteBatch batch;
 	private Texture[] passaros;
 	private Texture fundo;
@@ -33,14 +33,14 @@ public class MyGdxGame extends ApplicationAdapter
 	private Texture moeda2;
 	private Texture moedaAtual;
 
-	//
+	// Variáveis de colisores
 	private ShapeRenderer shapeRenderer;
 	private Circle circuloPassaro;
 	private Rectangle retanguloCanoCima;
 	private Rectangle retanguloCanoBaixo;
 	private Circle circuloMoeda;
 
-	//
+	//Variáveis responsáveis por informações como valores de ponto, gravidade e etc.
 	private float larguraDispositivo;
 	private float alturaDipositivo;
 	private float variacao = 0;
@@ -62,27 +62,27 @@ public class MyGdxGame extends ApplicationAdapter
 	private float valorMoeda1 = 5;
 	private float valorMoeda2 = 10;
 
-	//
+	//Variáveis que armazena informaçoes de texto, como score e recorde.
 	private BitmapFont textoPontuacao;
 	private BitmapFont textoReiniciar;
 	private BitmapFont textoMelhorPontuacao;
 
-	//
+	//Sons do jogo
 	private Sound somVoando;
 	private Sound somColisao;
 	private Sound somPontuacao;
 	private Sound somMoeda;
 
-	//
+	//Variável preferencias, que guarda informações das localizações no android
 	private Preferences preferencias;
 
-	//
+	//Variável que guarda informações da resolução do jogo e tela do celular
 	private OrthographicCamera camera;
 	private Viewport viewport;
 	private final float VIRTUAL_WIDTH = 720;
 	private final float VIRTUAL_HEIGHT = 1280;
 
-	//
+	//Método responsável por chamar outro metodo que contem texturas
 	@Override
 	public void create()
 	{
@@ -90,14 +90,14 @@ public class MyGdxGame extends ApplicationAdapter
 		inicializaObjetos();
 	}
 
-	//
+	//Método responsável por renderizar as texturas na tela e chama outros métodos
 	@Override
 	public void render()
 	{
-		//
+		//Um sistema de buffer que controla a cor dos pixels na tela, responsavel pelas cores dos assets do jogo
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-		//
+		//Chamando métodos para renderizar tudo na tela, após o check do buffer
 		verificarEstadoJogo();
 		validarPontos();
 		desenharCena();
@@ -105,7 +105,7 @@ public class MyGdxGame extends ApplicationAdapter
 		detectarColisoes();
 	}
 
-	//
+	//Método responsável por carregar as texturas usadas no jogo
 	private void inicializarTexturas()
 	{
 		passaros = new Texture[3];
@@ -124,14 +124,14 @@ public class MyGdxGame extends ApplicationAdapter
 		moedaAtual = moeda2;
 	}
 
-	//
+	//Método responsável por organizar as coisas na tela de acordo com a resolução
 	private  void inicializaObjetos()
 	{
-		//
+		//inicia os batchs que sao sprites que nao tem interação
 		batch = new SpriteBatch();
 		random = new Random();
 
-		//
+		//Inicia os objetos de acordo com a resolução do aparelho
 		larguraDispositivo = VIRTUAL_WIDTH;
 		alturaDipositivo = VIRTUAL_HEIGHT;
 		posicaoInicialVerticalPassaro = alturaDipositivo / 2;
@@ -140,51 +140,51 @@ public class MyGdxGame extends ApplicationAdapter
 	//	posicaoMoedaY = alturaDipositivo/2;
 		posicaoMoedaX = posicaoCanoHorizontal + larguraDispositivo/2;
 
-		//
+		//Renderiza o texto da pontuacao, define cor branca e deixa no tamanho definido
 		textoPontuacao = new BitmapFont();
 		textoPontuacao.setColor(Color.WHITE);
 		textoPontuacao.getData().setScale(10);
 
-		//
+		//Renderiza o texto de reinicia na cor verde e deixa do tamanho definido
 		textoReiniciar = new BitmapFont();
 		textoReiniciar.setColor(Color.GREEN);
 		textoReiniciar.getData().setScale(2);
 
-		//
+		//Renderiza o texto de recorde em vermelho e deixa do tamanho definido
 		textoMelhorPontuacao = new BitmapFont();
 		textoMelhorPontuacao.setColor(Color.RED);
 		textoMelhorPontuacao.getData().setScale(2);
 
-		//
+		//Cria o colisor dos objetos do jogo
 		shapeRenderer = new ShapeRenderer();
 		circuloPassaro = new Circle();
 		retanguloCanoBaixo = new Rectangle();
 		retanguloCanoCima = new Rectangle();
 		circuloMoeda = new Circle();
 
-		//
+		//Prepara os sons na cena para reproduzir quando for chamado
 		somVoando = Gdx.audio.newSound(Gdx.files.internal("som_asa.wav"));
 		somColisao = Gdx.audio.newSound(Gdx.files.internal("som_batida.wav"));
 		somPontuacao = Gdx.audio.newSound(Gdx.files.internal("som_pontos.wav"));
 		//somMoeda = Gdx.audio.newSound(Gdx.files.internal("coinsound.wav"));
 
-		//
+		//Chama as preferencias de outro codigo e puxa o recorde armazenado
 		preferencias = Gdx.app.getPreferences("flappybird");
 		pontuacaoMaxima = preferencias.getInteger("pontuacaoMaxima",0);
 
-		//
+		//Posiciona a camera na tela para que nao renderize as coisas fora do lugar
 		camera = new OrthographicCamera();
 		camera.position.set(VIRTUAL_WIDTH/2, VIRTUAL_HEIGHT/2,0);
 		viewport = new StretchViewport(VIRTUAL_WIDTH,VIRTUAL_HEIGHT, camera);
 	}
 
-	//
+	//Método responsável por definir o modo de jogo, como iniciar, começar jogo e game over
 	private  void verificarEstadoJogo()
 	{
-		//
+		//Boolean que chequa se o usuario tocou na tela
 		boolean toqueTela = Gdx.input.justTouched();
 
-		//
+		//Se tocou na tela, muda de iniciar para começar jogo
 		if (estadoJogo == 0)
 		{
 			if (toqueTela)
@@ -194,7 +194,7 @@ public class MyGdxGame extends ApplicationAdapter
 				somVoando.play();
 			}
 		}
-		//
+		//Se não tocou na tela, ou deu game over, chama outro if
 		else if (estadoJogo == 1)
 		{
 			if (toqueTela)
@@ -203,11 +203,11 @@ public class MyGdxGame extends ApplicationAdapter
 				somVoando.play();
 			}
 
-			//
+			//Responsável pela velocidade dos assets na tela
 			posicaoCanoHorizontal -= Gdx.graphics.getDeltaTime() * 200;
 			posicaoMoedaX -= Gdx.graphics.getDeltaTime() * 200;
 
-			//
+			//Checando colisão do cano ao player
 			if (posicaoCanoHorizontal < -canoTopo.getWidth())
 			{
 				posicaoCanoHorizontal = larguraDispositivo;
@@ -215,13 +215,13 @@ public class MyGdxGame extends ApplicationAdapter
 				passouCano = false;
 			}
 
-			//
+			//Se a moeda nao for coletada, e ela sai da tela, ela é respawnada
 		//	if (posicaoMoedaX < -moedaAtual.getWidth() / 2 * escalaMoeda)
 		//	{
 		//		resetaMoeda();
 		//	}
 
-			//
+			//Responsável pelo movimento do passaro, desligando gravidade e adicionando novamente
 			if (posicaoInicialVerticalPassaro > 0 || toqueTela)
 			{
 				posicaoInicialVerticalPassaro = posicaoInicialVerticalPassaro - gravidade;
@@ -229,7 +229,7 @@ public class MyGdxGame extends ApplicationAdapter
 			}
 		}
 
-		//
+		//Se gamer over, guarda as informações de score e checa se é recorde novo ou nao
 		else if (estadoJogo == 2)
 		{
 			if (pontos > pontuacaoMaxima)
@@ -241,7 +241,7 @@ public class MyGdxGame extends ApplicationAdapter
 
 			posicaoHorizontalPassaro -= Gdx.graphics.getDeltaTime() * 500;
 
-			//
+			//Se game over e o player tocar na tela, recomeça o jogo para a tela inical
 			if (toqueTela)
 			{
 				estadoJogo = 0;
@@ -255,10 +255,10 @@ public class MyGdxGame extends ApplicationAdapter
 		}
 	}
 
-	//
+	//Método responsável por detectar colisões
 	private void detectarColisoes()
 	{
-		//
+		//Colisor do passaro, centralizado ao asset
 		circuloPassaro.set
 				(
 						posicaoHorizontalPassaro + passaros[0].getWidth() * escalaPassaro / 2,
@@ -266,7 +266,7 @@ public class MyGdxGame extends ApplicationAdapter
 						(passaros[0].getHeight()  * escalaPassaro) / 2
 				);
 
-		//
+		//Colisor da moeda
 	//	circuloMoeda.set
 	//			(
 	//					posicaoMoedaX - ((moedaAtual.getWidth() * escalaMoeda) / 2),
@@ -274,7 +274,7 @@ public class MyGdxGame extends ApplicationAdapter
 	//					(moedaAtual.getWidth() * escalaMoeda) / 2
 	//			);
 
-		//
+		//Colisor do cano de baixo, ajustado com o asset
 		retanguloCanoBaixo.set
 				(
 						posicaoCanoHorizontal,
@@ -291,12 +291,12 @@ public class MyGdxGame extends ApplicationAdapter
 						canoTopo.getHeight()
 				);
 
-		//
+		//Se houver colisão, ativa as boleanas de gameover
 		boolean colidiuCanoCima  = Intersector.overlaps(circuloPassaro, retanguloCanoCima);
 		boolean colidiuCanoBaixo = Intersector.overlaps(circuloPassaro, retanguloCanoBaixo);
 	//	boolean colidiuMoeda 	 = Intersector.overlaps(circuloPassaro, circuloMoeda);
 
-		//
+		//Se colidiu com a moeda for verdadeira, soma pontos e checa se é moeda dourada ou prata
 	//	if(colidiuMoeda == true)
 	//	{
 	//		if(moedaAtual == moeda1) pontos += valorMoeda1;
@@ -306,7 +306,7 @@ public class MyGdxGame extends ApplicationAdapter
 	//		somMoeda.play();
 	//	}
 
-		//
+		//Se colidiu com cano baixo ou cano de cima, ativa o modo gameover
 		if (colidiuCanoBaixo || colidiuCanoCima)
 		{
 			if (estadoJogo == 1)
@@ -317,13 +317,13 @@ public class MyGdxGame extends ApplicationAdapter
 		}
 	}
 
-	//
+	//Método responsável por posicionar background usando batchs
 	private void desenharCena()
 	{
-		//
+		//batch combinando com a camera
 		batch.setProjectionMatrix(camera.combined);
 
-		//
+		//iniciar o batch que desenha todos os assets na tela
 		batch.begin();
 
 		batch.draw(fundo,0,0,larguraDispositivo,alturaDipositivo);
@@ -338,7 +338,7 @@ public class MyGdxGame extends ApplicationAdapter
 
 		if(estadoJogo != 0)
 		{
-			//
+			//batch que desenha o primeiro cano na tela inicial
 			batch.draw
 					(
 							canoBaixo,
@@ -346,7 +346,7 @@ public class MyGdxGame extends ApplicationAdapter
 							alturaDipositivo / 2 - canoBaixo.getHeight() - espacoEntreCanos/2 + posicaoCanoVertical
 					);
 
-			//
+			//batch que desenha o primeiro cano na tela inicial
 			batch.draw
 					(
 							canoTopo,
@@ -354,7 +354,7 @@ public class MyGdxGame extends ApplicationAdapter
 							alturaDipositivo / 2 + espacoEntreCanos / 2 + posicaoCanoVertical
 					);
 
-			//
+			//batch que desenha a primeira moeda na tela inicial
 			batch.draw
 					(
 							moedaAtual,
@@ -368,13 +368,13 @@ public class MyGdxGame extends ApplicationAdapter
 		batch.end();
 	}
 
-	//
+	//Método responsável por chamar os batchs que desenham os pontos
 	private void desenharInterface()
 	{
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 
-		//
+		//desenha a pontuacao na posicao definida
 		textoPontuacao.draw
 				(
 						batch,
@@ -383,12 +383,12 @@ public class MyGdxGame extends ApplicationAdapter
 						alturaDipositivo - 110
 				);
 
-		//
+		//Switch que troca os batchs na tela conforme o estado do jogo
 		switch (estadoJogo)
 		{
 			case 0:
 			{
-				//
+				//desenha a logo na tela inicial
 				batch.draw
 						(
 								logo,
@@ -403,7 +403,7 @@ public class MyGdxGame extends ApplicationAdapter
 
 			case 2:
 			{
-				//
+				//se for game over, desenha a logo game over
 				batch.draw
 						(
 								gameOver,
@@ -411,7 +411,7 @@ public class MyGdxGame extends ApplicationAdapter
 								alturaDipositivo / 2
 						);
 
-				//
+				//Desenha o texto reiniciar
 				textoReiniciar.draw
 						(
 								batch,
@@ -420,7 +420,7 @@ public class MyGdxGame extends ApplicationAdapter
 								alturaDipositivo/2 - gameOver.getHeight()/2
 						);
 
-				//
+				//Desenha o recorde na tela
 				textoMelhorPontuacao.draw
 						(
 								batch,
@@ -433,7 +433,7 @@ public class MyGdxGame extends ApplicationAdapter
 		batch.end();
 	}
 
-	//
+	//Método responsável pelos pontos ao passar entre os canos
 	public void validarPontos()
 	{
 		if (posicaoCanoHorizontal < posicaoHorizontalPassaro)
@@ -454,7 +454,7 @@ public class MyGdxGame extends ApplicationAdapter
 		}
 	}
 
-	//
+	//Método responsável por respawnar a moeda caso nao colete ela, ou cria uma nova ao coletar
 	/*private void resetaMoeda()
 	{
 		posicaoMoedaX = posicaoCanoHorizontal + canoBaixo.getWidth() + moedaAtual.getWidth() + random.nextInt((int) (larguraDispositivo - (moedaAtual.getWidth() * escalaMoeda)));
@@ -471,14 +471,14 @@ public class MyGdxGame extends ApplicationAdapter
 		}
 	} */
 
-	//
+	//Método responsável por checar a resolucao da tela a toda momenta(DILMA)
 	@Override
 	public void resize(int width, int height)
 	{
 		viewport.update(width, height);
 	}
 
-	//
+	//Limpa e libera memória do aparelho
 	@Override
 	public void dispose () {}
 }
