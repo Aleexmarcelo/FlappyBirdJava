@@ -223,6 +223,10 @@ public class MyGdxGame extends ApplicationAdapter
 					resetaMoeda();
 				}
 
+			if (posicaoInicialVerticalPassaro < 0 || posicaoInicialVerticalPassaro > alturaDipositivo) {
+				estadoJogo = 2;
+			}
+
 			//Responsável pelo movimento do passaro, desligando gravidade e adicionando novamente
 			if (posicaoInicialVerticalPassaro > 0 || toqueTela)
 			{
