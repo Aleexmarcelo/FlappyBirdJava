@@ -247,7 +247,6 @@ public class MyGdxGame extends ApplicationAdapter {
 				posicaoInicialVerticalPassaro = alturaDipositivo / 2;
 				posicaoCanoHorizontal = larguraDispositivo;
 				resetaMoeda();
-				dificuldade = 200;
 			}
 		}
 	}
