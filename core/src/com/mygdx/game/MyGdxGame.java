@@ -101,7 +101,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		verificarEstadoJogo();
 		validarPontos();
 		desenharCena();
-		desenharInterface();
+		desenharTexturas();
 		detectarColisoes();
 	}
 
@@ -357,10 +357,10 @@ public class MyGdxGame extends ApplicationAdapter {
 	}
 
 	//Método responsável por chamar os batchs que desenham os pontos
-	private void desenharInterface()
+	private void desenharTexturas()
 	{
 		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
+		//batch.begin();
 
 		//desenha a pontuacao na posicao definida
 		textoPontuacao.draw
